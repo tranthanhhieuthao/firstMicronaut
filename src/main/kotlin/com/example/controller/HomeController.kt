@@ -3,12 +3,9 @@ package com.example.controller
 import com.example.DTO.UserDTO
 import com.example.Response.ResponseFormat
 import com.example.Service.UserService
-import com.example.model.User
 import io.micronaut.context.annotation.Parameter
 import io.micronaut.http.HttpResponse
-import io.micronaut.http.MediaType
 import io.micronaut.http.annotation.*
-import java.util.*
 import javax.inject.Inject
 
 @Controller("/api")
@@ -22,8 +19,8 @@ class HomeController {
         return "hello"
     }
 
-    @Get("/user")
-    fun getUser(@Parameter page: Int, @Parameter size: Int):  HttpResponse<ResponseFormat> {
+    @Get("/users")
+    fun getUsers(@Parameter(value = "page") page: Int, @Parameter(value = "size") size: Int):  HttpResponse<ResponseFormat> {
         return HttpResponse.ok(userService.getAllUsers(page, size))
     }
 

@@ -18,9 +18,9 @@ class UserService {
     fun getAllUsers(page: Int, size: Int): ResponseFormat {
         page ?: 1
         size ?: 10
-        var listUser: Page<User> = userRepository.findAll(Pageable.from(-page, size))
+        var listUser: Page<User> = userRepository.findAll(Pageable.from(page-1, size))
         listUser?.let {
-            return ResponseFormat(listUser, ResponseFormat.MessageCode.SUCCESS.toString())
+            return ResponseFormat(it, ResponseFormat.MessageCode.SUCCESS.toString())
         }
         return ResponseFormat(null, ResponseFormat.MessageCode.NOT_EXITS.toString())
     }
