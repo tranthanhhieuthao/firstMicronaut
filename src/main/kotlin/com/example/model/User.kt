@@ -1,7 +1,7 @@
 package com.example.model
 
 import com.example.DTO.UserDTO
-import java.util.*
+import java.util.Date
 import javax.persistence.*
 
 @Entity

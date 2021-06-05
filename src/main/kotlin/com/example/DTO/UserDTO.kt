@@ -1,7 +1,7 @@
 package com.example.DTO
 
 import com.example.model.User
-import java.util.*
+import java.util.Date
 
 data class UserDTO(
     var name: String = "",
@@ -13,6 +13,16 @@ data class UserDTO(
 ) {
     fun convertToUser(): User {
         var user: User = User()
+        user.age = age
+        user.birthday = birthday
+        user.marriage = marriage
+        user.name = name
+        user.password = password
+        user.userName = userName
+        return user
+    }
+
+    fun convertToUserByInstance(user: User): User {
         user.age = age
         user.birthday = birthday
         user.marriage = marriage

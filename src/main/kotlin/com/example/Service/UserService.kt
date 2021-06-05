@@ -16,13 +16,13 @@ class UserService {
     lateinit var userRepository: UserRepository
 
     fun getAllUsers(page: Int, size: Int): ResponseFormat {
-        var listUser: Page<User>
-        if (page == null || size == null) listUser = userRepository.findAll(Pageable.unpaged())
-        listUser = userRepository.findAll(Pageable.from(-page, size))
+        page ?: 1
+        size ?: 10
+        var listUser: Page<User> = userRepository.findAll(Pageable.from(-page, size))
         listUser?.let {
             return ResponseFormat(listUser, ResponseFormat.MessageCode.SUCCESS.toString())
         }
-        return ResponseFormat({}, ResponseFormat.MessageCode.NOT_EXITS.toString())
+        return ResponseFormat(null, ResponseFormat.MessageCode.NOT_EXITS.toString())
     }
 
     fun getDetailUser(id: Long): ResponseFormat {
@@ -30,36 +30,42 @@ class UserService {
         user?.let {
             return ResponseFormat(user, ResponseFormat.MessageCode.SUCCESS.toString())
         }
-        return ResponseFormat({}, ResponseFormat.MessageCode.NOT_EXITS.toString())
+        return ResponseFormat(null, ResponseFormat.MessageCode.NOT_EXITS.toString())
     }
 
     fun getUserByUserName(userName: String): ResponseFormat {
-        var user: User = userRepository.getByUserName(userName)
+        var user: User
+        try {
+             user = userRepository.getByUserName(userName)
+        } catch (e: Exception) {
+            return ResponseFormat(null, ResponseFormat.MessageCode.NOT_EXITS.toString())
+        }
+
         user?.let {
             return  ResponseFormat(user, ResponseFormat.MessageCode.SUCCESS.toString()
             )
         }
-        return ResponseFormat({}, ResponseFormat.MessageCode.NOT_EXITS.toString())
+        return ResponseFormat(null, ResponseFormat.MessageCode.NOT_EXITS.toString())
     }
 
     fun createOrUpdateUser(userDTO: UserDTO): ResponseFormat {
-        var user = getUserByUserName(userName = userDTO.userName).data as User
+        var user = getUserByUserName(userName = userDTO.userName).data
         user?.let {
-            userRepository.save(user)
-            return ResponseFormat({}, ResponseFormat.MessageCode.SUCCESS.toString() )
+            userRepository.update(userDTO.convertToUserByInstance(it as User))
+            return ResponseFormat(null, ResponseFormat.MessageCode.SUCCESS.toString() )
         }
-      user = userDTO.convertToUser()
+        user = userDTO.convertToUser()
         userRepository.save(user)
-        return ResponseFormat({}, ResponseFormat.MessageCode.SUCCESS.toString())
+        return ResponseFormat(null, ResponseFormat.MessageCode.SUCCESS.toString())
     }
 
     fun deleteUsers(listId: List<Long>): ResponseFormat {
         return try {
             userRepository.deleteByIdIn(listId)
-            ResponseFormat({}, ResponseFormat.MessageCode.SUCCESS.toString())
+            ResponseFormat(null, ResponseFormat.MessageCode.SUCCESS.toString())
         } catch (e: Exception) {
             e.stackTrace
-            ResponseFormat({}, ResponseFormat.MessageCode.FAIL.toString())
+            ResponseFormat(null, ResponseFormat.MessageCode.FAIL.toString())
         }
     }
 
