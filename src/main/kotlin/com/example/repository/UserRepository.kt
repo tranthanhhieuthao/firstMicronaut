@@ -2,6 +2,7 @@ package com.example.repository
 
 import com.example.model.User
 import io.micronaut.context.annotation.Executable
+import io.micronaut.context.annotation.Parameter
 import io.micronaut.data.annotation.Query
 import io.micronaut.data.annotation.Repository
 import io.micronaut.data.model.Page
@@ -13,7 +14,7 @@ interface UserRepository: CrudRepository<User, Long>{
 
     fun findAll(pageable: Pageable): Page<User>
 
-    @Query(value = "SELECT * FROM users WHERE :username LIKE '%user_name%'", nativeQuery = true)
+//    @Query(value = "SELECT * FROM users WHERE :username LIKE '%user_name%'", nativeQuery = true)
     fun getByUserName(userName: String): User
 
     fun deleteByIdIn(listId: List<Long>)

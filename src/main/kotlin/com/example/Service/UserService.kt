@@ -33,7 +33,8 @@ class UserService {
         return ResponseFormat(null, ResponseFormat.MessageCode.NOT_EXITS.toString())
     }
 
-    fun getUserByUserName(userName: String): ResponseFormat {
+    private fun getUserByUserName(userName: String): ResponseFormat {
+        userName ?: ""
         var user: User
         try {
              user = userRepository.getByUserName(userName)

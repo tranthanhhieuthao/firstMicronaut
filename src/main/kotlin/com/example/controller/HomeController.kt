@@ -14,7 +14,7 @@ class HomeController {
     @Inject
     lateinit var userService: UserService
 
-    @Get("/home")
+    @Get("/hello")
     fun home(): String {
         return "hello"
     }
@@ -29,9 +29,14 @@ class HomeController {
         return HttpResponse.ok(userService.getDetailUser(id))
     }
 
-    @Put("/user/update")
+    @Post("/user/update")
     fun createOrUpdate(@Body userDTO: UserDTO): HttpResponse<ResponseFormat> {
         return HttpResponse.ok(userService.createOrUpdateUser(userDTO))
+    }
+
+    @Post("/users/delete")
+    fun deleteUsers(@Body listId: List<Long>): HttpResponse<ResponseFormat> {
+        return HttpResponse.ok(userService.deleteUsers(listId))
     }
 
 
