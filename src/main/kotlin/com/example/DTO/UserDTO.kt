@@ -9,7 +9,8 @@ data class UserDTO(
     var birthday: Date = Date(),
     var age: Int = 0,
     var marriage: Boolean = false,
-    var password: String = "123456"
+    var password: String = "123456",
+    var role:String = "USER"
 ) {
     fun convertToUser(): User {
         var user: User = User()
@@ -19,6 +20,7 @@ data class UserDTO(
         user.name = name
         user.password = password
         user.userName = userName
+        user.role = role
         return user
     }
 
