@@ -131,12 +131,16 @@
             <version>42.2.5</version>
         </dependency>
 
-        <!-- Add the following to your annotationProcessorPaths element -->
-<!--        <dependency>-->
-<!--            <groupId>io.micronaut.security</groupId>-->
-<!--            <artifactId>micronaut-security-jwt</artifactId>-->
-<!--            <scope>compile</scope>-->
-<!--        </dependency>-->
+        <dependency>
+            <groupId>io.micronaut.security</groupId>
+            <artifactId>micronaut-security-jwt</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>io.micronaut.security</groupId>
+            <artifactId>micronaut-security-annotations</artifactId>
+        </dependency>
+
 
     </dependencies>
 

@@ -1,6 +1,8 @@
 package com.example.DTO
 
 import com.example.model.User
+import com.nimbusds.jose.crypto.PasswordBasedEncrypter
+import com.nimbusds.jose.crypto.impl.PasswordBasedCryptoProvider
 import java.util.Date
 
 data class UserDTO(

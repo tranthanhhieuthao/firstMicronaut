@@ -33,7 +33,7 @@ class UserService {
         return ResponseFormat(null, ResponseFormat.MessageCode.NOT_EXITS.toString())
     }
 
-    private fun getUserByUserName(userName: String): ResponseFormat {
+     fun getUserByUserName(userName: String): ResponseFormat {
         userName ?: ""
         var user: User
         try {
@@ -49,13 +49,17 @@ class UserService {
         return ResponseFormat(null, ResponseFormat.MessageCode.NOT_EXITS.toString())
     }
 
-    fun createOrUpdateUser(userDTO: UserDTO): ResponseFormat {
+    fun UpdateUser(userDTO: UserDTO): ResponseFormat {
         var user = getUserByUserName(userName = userDTO.userName).data
         user?.let {
             userRepository.update(userDTO.convertToUserByInstance(it as User))
             return ResponseFormat(null, ResponseFormat.MessageCode.SUCCESS.toString() )
         }
-        user = userDTO.convertToUser()
+        return ResponseFormat(null, ResponseFormat.MessageCode.NOT_EXITS.toString())
+    }
+
+    fun CreateUser(userDTO: UserDTO): ResponseFormat {
+        var user = userDTO.convertToUser()
         userRepository.save(user)
         return ResponseFormat(null, ResponseFormat.MessageCode.SUCCESS.toString())
     }

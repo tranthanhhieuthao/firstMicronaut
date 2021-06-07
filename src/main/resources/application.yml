@@ -4,6 +4,15 @@ micronaut:
   server:
     cors:
       enabled: true
+  security:
+    token:
+      jwt:
+        signatures:
+          secret:
+            generator:
+              secret: tranthanhieuthaoxuanhaithanhquang
+              jws-algorithm: HS256
+    authentication: bearer
 
 datasources:
   default:
@@ -21,11 +30,4 @@ jpa:
       classpath: true
       packages: 'com.example'
 
-security:
-  authentication: bearer
-  token:
-    jwt:
-      signatures:
-        secret:
-          generator:
-            secret: '"${JWT_GENERATOR_SIGNATURE_SECRET:tranthanhhieuthao}"'
+
