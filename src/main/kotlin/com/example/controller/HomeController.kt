@@ -34,7 +34,6 @@ class HomeController {
     }
 
     @Get("/users")
-    @Secured(("ADMIN"))
     fun getUsers(@Parameter(value = "page") page: Int, @Parameter(value = "size") size: Int):  HttpResponse<ResponseFormat> {
         return HttpResponse.ok(userService.getAllUsers(page, size))
     }
