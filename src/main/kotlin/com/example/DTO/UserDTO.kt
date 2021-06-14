@@ -1,17 +1,15 @@
 package com.example.DTO
 
 import com.example.model.User
-import com.nimbusds.jose.crypto.PasswordBasedEncrypter
-import com.nimbusds.jose.crypto.impl.PasswordBasedCryptoProvider
 import java.util.Date
 
 data class UserDTO(
-    var name: String = "",
-    var userName: String = "",
-    var birthday: Date = Date(),
-    var age: Int = 0,
+    var name: String? = null,
+    var userName: String? = null,
+    var birthday: Date? = null,
+    var age: Int? = null,
     var marriage: Boolean = false,
-    var password: String = "123456",
+    var password: String? = null,
     var role:String = "USER"
 ) {
     fun convertToUser(): User {

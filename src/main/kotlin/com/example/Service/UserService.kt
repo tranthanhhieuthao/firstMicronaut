@@ -50,7 +50,7 @@ class UserService {
     }
 
     fun UpdateUser(userDTO: UserDTO): ResponseFormat {
-        var user = getUserByUserName(userName = userDTO.userName).data
+        var user = userDTO.userName?.let { getUserByUserName(userName = it).data }
         user?.let {
             userRepository.update(userDTO.convertToUserByInstance(it as User))
             return ResponseFormat(null, ResponseFormat.MessageCode.SUCCESS.toString() )

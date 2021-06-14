@@ -9,13 +9,13 @@ import javax.persistence.*
 class User (
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        var id: Long = -1,
-        var name: String = "",
-        var userName: String = "",
-        var birthday: Date = Date(),
-        var age: Int = 0,
+        var id: Long? = null,
+        var name: String? = null,
+        var userName: String? = null,
+        var birthday: Date? = null,
+        var age: Int? = null,
         var marriage: Boolean = false,
-        var password: String = "123456",
+        var password: String? = null,
         var role: String = "USER"
 
 ) {
